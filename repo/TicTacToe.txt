@@ -1,0 +1,5 @@
+Jake played 1 total games, won 1 games, lost 0 games,  and tied 0 games.
+Jake played 2 total games, won 1 games, lost 1 games,  and tied 0 games.
+Sara played 1 total games, won 1 games, lost 0 games,  and tied 0 games.
+Jake played 3 total games, won 2 games, lost 1 games,  and tied 0 games.
+Jake played 4 total games, won 3 games, lost 1 games,  and tied 0 games.

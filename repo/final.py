@@ -1,3 +1,27 @@
+"""
+Jake Elliott
+7/7/2024
+Beginning Programming: Python - CSCI 110
+
+***** FINAL PROJECT *****
+
+Tic Tac Toe game that has player play against the computer.
+
+Algorithm:
+The game is designed so that the player enters first with an X or O, and the computer goes second.
+
+The program uses a combination of ints, strings, lists, conditonals, loops, test assert, etc to create and implement the game.
+
+Functions and format of program:
+- A function that greets the player, asks for thier name, and introduces them to the game.
+- A function to display the game board.
+- A function to check for wins, losses, or ties.
+- Functions for handling players moves as well as computers.
+- A main game function that implements the game logic, and checks and lists the results of the game.
+- A menu and loop to continue playing multiple games in one session.
+- Function that writes the players total stats to a txt file when they exit, and also a function to read in previous stats from the txt file.
+- Program also displays stats for sessions in the terminal when exiting the game.
+"""
 import sys
 import random
 
@@ -18,7 +42,6 @@ def display_board():
         for j in range(3):
             print(board[i][j], "|", end="")
         print("\n  --- --- ---")
-
 
 
 def check_win(symbol):
@@ -66,8 +89,11 @@ def write_stats_to_file(name):
     with open("TicTacToe.txt", "a") as outfile:
         outfile.write("{} played {} total games, won {} games, lost {} games,  and tied {} games.\n".format(name, games_played, games_won, games_lost, games_tied))
 
+
 def play_game(name):
     global board, games_played, games_won, games_lost, games_tied, player_choice, computer_choice
+    stats = read_stats_from_file(name)
+    games_played, games_won, games_lost, games_tied = stats
     while True:
         board = [[' ' for _ in range(3)] for _ in range(3)]
         player_choice = input("Please select and enter either X or O: ").upper()
@@ -102,6 +128,28 @@ def play_game(name):
     write_stats_to_file(name)
     print("{} played {} total games, won {}, lost {}, and tied {}.\n".format(name, games_played, games_won, games_lost, games_tied))
 
+
+def read_stats_from_file(name):
+    games_played = 0
+    games_won = 0
+    games_lost = 0
+    games_tied = 0
+    try:
+        with open("TicTacToe.txt", "r") as infile:
+            for line in infile:
+                stats = line.split()
+                if stats[0] == name:
+                    games_played = int(stats[2])
+                    games_won = int(stats[6])
+                    games_lost = int(stats[9])
+                    games_tied = int(stats[13])
+    
+    except FileNotFoundError:
+        pass
+    return games_played, games_won, games_lost, games_tied
+
+
+
 def display_menu():
     print("1. Play Game")
     print("2. Description of game")
@@ -109,8 +157,14 @@ def display_menu():
         
 
 def main():
+    global games_won, games_lost, games_tied, games_played
+    games_won = 0
+    games_lost = 0
+    games_tied = 0
+    games_played = 0
     print("Welcome to my Tic Tac Toe Game!")
     name = input("To begin, please enter your name: ")
+    read_stats_from_file(name)
     print("Welcome {}, lets get started.\n".format(name))
     while True:
         display_menu()
@@ -118,7 +172,7 @@ def main():
         if decision == '1':
             play_game(name)
         elif decision == '2':
-            print("This program runs your typical Tic Tac Toe game. Its player vs the computer, and the player always chooses first between 'X' and 'O'. Play as many times as you want! After you exiting the game your results will appear in the terminal, as well as in the output file.")
+            print("This program runs your typical Tic Tac Toe game. It's player vs the computer. The player always chooses first between 'X' and 'O'. Play as many times as you want! After exiting the game your results will appear in the terminal, as well as the output file.")
         elif decision == '3':
             print("Hope you enjoyed the game. See you next time!")
             break
