@@ -8,3 +8,8 @@
 | **Mav Username**            | Jdelliott |
 | **GitHub Username**         | Jdelliott12 |
 | **Repository**          | https://github.com/jdelliott12/CS0-jdelliott |
+
+
+*** FINAL Project ***
+| **Status**  | COMPLETED |
+| **Location**  | https://github.com/jdelliott12/CS0-jdelliott/tree/main/repo |
